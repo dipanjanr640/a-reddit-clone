@@ -59,7 +59,7 @@ pipeline {
       }
     stage('push to az acr') {
       steps {
-        azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001'], [exportVariablesString: '', script: 'docker push "${IMAGE_NAME}":latest']], principalCredentialId: 'AzureServicePrinciple'
+        azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001'], [exportVariablesString: 'IMAGE_NAME', script: 'docker push "${IMAGE_NAME}":latest']], principalCredentialId: 'AzureServicePrinciple'
         }
       }
     }
