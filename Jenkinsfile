@@ -9,7 +9,7 @@ pipeline {
     APP_NAME = "dip-reddit-app"
     RELEASE = "1.0.0"
     IMAGE_NAME = "docker"+"/"+"${APP_NAME}"
-    IAMGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+    IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
   }
   stages {
     stage('clear workspace') {
@@ -48,6 +48,11 @@ pipeline {
         //trivy already installed on local system where jenkins agent is running. trivy scane is need to checking vulnerability
         //The trivy fs command is used to scan the filesystem of a container image for vulnerabilities.
         sh "trivy fs . > trivyfs.txt"
+        }
+      }
+    stage('build docker image') {
+      steps {
+        sh '''docker build -t $IMAGE_NAME:latest'''
         }
       }
     }
