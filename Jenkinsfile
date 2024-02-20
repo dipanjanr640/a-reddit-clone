@@ -9,7 +9,7 @@ pipeline {
     APP_NAME = "dip-reddit-app"
     RELEASE = "1.0.0"
     IMAGE_NAME = "docker"+"/"+"${APP_NAME}"
-    IAMGE_TAGE = "${RELEASE}-"${BUILD_NUMBER}"
+    IAMGE_TAGE = "${RELEASE}"-"${BUILD_NUMBER}"
   }
   stages {
     stage('clear workspace') {
