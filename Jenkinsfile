@@ -78,5 +78,12 @@ pipeline {
         }
       }
     }
+  post {
+    always {
+      emailext body: '''Project : ${env.JOB_NAME}
+      Build Number: ${env.BUILD_NUMBER}
+      URL: ${env.BUILD_URL}''', subject: '${currentBuild.result}', to: 'dipanjanr640@gmail.com'
+    }
+  }
   }
 
