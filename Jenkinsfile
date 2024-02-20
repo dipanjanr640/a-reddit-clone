@@ -53,7 +53,7 @@ pipeline {
     stage('build docker image') {
       steps {
         sh '''
-        pwd
+        cd a-reddit-clone
         docker build -t $IMAGE_NAME:latest'''
         }
       }
