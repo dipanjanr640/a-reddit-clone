@@ -34,7 +34,7 @@ pipeline {
     stage('quality gate') {
       steps {
         //quality gate checks using sonar-token
-        waitforQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+        waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
         }
       }
     stage('dependecies install') {
