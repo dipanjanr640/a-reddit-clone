@@ -54,7 +54,7 @@ pipeline {
       steps {
         sh '''
         cd a-reddit-clone
-        docker build -t $IMAGE_NAME:$IMAGE_TAG .'''
+        docker build -t $IMAGE_NAME:latest .'''
         }
       }
     stage('push to az acr') {
@@ -67,9 +67,14 @@ pipeline {
       }
     stage('trivy image scan') {
       steps {
-        sh "trivy image myacr1001.azurecr.io/dip-reddit-app:latest --scanners vuln --exit-code 0 > trivyimage.txt"
+        sh "trivy image $IMAGE_NAME:latest --scanners vuln --exit-code 0 > trivyimage.txt"
         //Or you can use docker trivy image to scan your image
         //sh ('docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ashfaque9x/reddit-clone-pipeline:latest --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table > trivyimage.txt')
+        }
+      }
+    stage('clear build image') {
+      steps {
+        sh "docker rmi $IMAGE_NAME:latest"
         }
       }
     }
