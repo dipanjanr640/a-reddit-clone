@@ -47,7 +47,7 @@ pipeline {
       steps {
         //trivy already installed on local system where jenkins agent is running. trivy scane is need to checking vulnerability
         //The trivy fs command is used to scan the filesystem of a container image for vulnerabilities.
-        sh "trivy fs > trivyfs.txt"
+        sh "trivy fs . > trivyfs.txt"
         }
       }
     }
