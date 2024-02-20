@@ -60,7 +60,7 @@ pipeline {
     stage('push to az acr') {
       steps {
         sh 'cd a-reddit-clone'
-        azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001'], [exportVariablesString: '', script: 'sudo docker push docker/dip-reddit-app:latest']], principalCredentialId: 'AzureServicePrinciple'
+        azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001'], [exportVariablesString: '', script: 'docker push docker/dip-reddit-app:latest']], principalCredentialId: 'AzureServicePrinciple'
         }
       }
     }
