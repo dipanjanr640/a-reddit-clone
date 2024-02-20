@@ -43,7 +43,7 @@ pipeline {
         sh "npm install"
         }
       }
-    stage('trivy scan') {
+    stage('trivy code scan') {
       steps {
         //trivy already installed on local system where jenkins agent is running. trivy scane is need to checking vulnerability
         //The trivy fs command is used to scan the filesystem of a container image for vulnerabilities.
@@ -62,8 +62,12 @@ pipeline {
         azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001']], principalCredentialId: 'AzureSPNew'
         sh '''
         docker push $IMAGE_NAME:latest
-        docker push $IMAGE_NAME:$IMAGE_TAG
         '''
+        }
+      }
+    stage('trivy image scan') {
+      steps {
+        sh "trivy --severity HIGH,CRITICAL ${IMAGE_NAME}:latest > trivyfs.txt"
         }
       }
     }
