@@ -59,10 +59,10 @@ pipeline {
       }
     stage('push to az acr') {
       steps {
-        sh '''
-        az acr login --name myacr1001 --username 811ca00c-bd20-4f28-9949-ad91263a5371 --password FWt8Q~QBT4exjwUGj5PW22KWy-4UpjazUo.oiaZu
-        docker push docker/dip-reddit-app:latest'''
-        //azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001'], [exportVariablesString: '', script: 'docker push docker/dip-reddit-app:latest']], principalCredentialId: 'AzureServicePrinciple'
+        // sh '''
+        // az acr login --name myacr1001 --username 811ca00c-bd20-4f28-9949-ad91263a5371 --password FWt8Q~QBT4exjwUGj5PW22KWy-4UpjazUo.oiaZu
+        // docker push docker/dip-reddit-app:latest'''
+        azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001'], [exportVariablesString: '', script: 'docker push docker/dip-reddit-app:latest']], principalCredentialId: 'AzureSPNew'
         }
       }
     }
