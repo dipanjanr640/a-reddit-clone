@@ -27,14 +27,14 @@ pipeline {
        //sonar analysis - using sonar-server (management system) it run command to analysis by sonarqube with sonar tool(management tool)
         withSonarQubeEnv('sonar-server') {
          sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=eddit-clone-ci \
-         -Dsonar.projectKey=reddit-clone-ci'''
+         -Dsonar.projectKey=eddit-clone-ci'''
                  }
       }      
     }
     stage('quality gate') {
       steps {
         //quality gate checks using sonar-token
-        waitforQualityGate abortPipeline: false, credentiaslId: 'sonar-token'
+        waitforQualityGate abortPipeline: false, credentialsId: 'sonar-token'
         }
       }
     stage('dependecies install') {
