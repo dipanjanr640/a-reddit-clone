@@ -53,7 +53,7 @@ pipeline {
     stage('build docker image') {
       steps {
         sh '''
-        sudo docker build -t $IMAGE_NAME:latest'''
+        docker build -t $IMAGE_NAME:latest .'''
         }
       }
     }
