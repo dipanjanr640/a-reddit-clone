@@ -8,7 +8,7 @@ pipeline {
     SCANNER_HOME = tool 'sonar-scanner'
     APP_NAME = "dip-reddit-app"
     RELEASE = "1.0.0"
-    IMAGE_NAME = "docker"+"/"+"${APP_NAME}"
+    IMAGE_NAME = "myacr1001.azurecr.io"+"/"+"${APP_NAME}"
     IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
   }
   stages {
@@ -62,7 +62,7 @@ pipeline {
         // sh '''
         // az acr login --name myacr1001 --username 811ca00c-bd20-4f28-9949-ad91263a5371 --password FWt8Q~QBT4exjwUGj5PW22KWy-4UpjazUo.oiaZu
         // docker push docker/dip-reddit-app:latest'''
-        azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001'], [exportVariablesString: '', script: 'docker push --debug docker/dip-reddit-app:latest']], principalCredentialId: 'AzureSPNew'
+        azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name myacr1001'], [exportVariablesString: '', script: 'docker push myacr1001.azurecr.io/dip-reddit-app:latest']], principalCredentialId: 'AzureSPNew'
         }
       }
     }
