@@ -52,7 +52,9 @@ pipeline {
       }
     stage('build docker image') {
       steps {
-        sh '''docker build -t $IMAGE_NAME:latest'''
+        sh '''
+        pwd
+        docker build -t $IMAGE_NAME:latest'''
         }
       }
     }
